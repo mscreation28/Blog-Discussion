@@ -9,34 +9,33 @@ namespace BlogDiscussion2.Models
 {
     public class Blog
     {
-        [Key]
-        public int BlogId { get; set; }
 
-        [Display(Name = "User ID")]
-        public string UserId { get; set; }
+        [Key]
+        public int id { get; set; }
+
         [ForeignKey("UserId")]
-        public User Users { get; set; }
+        public User users { get; set; }
 
         [Display(Name = "Title")]
-        public string BlogTitle { get; set; }
+        public string title { get; set; }
 
-        [Display(Name = "Content")]
+        [Display(Name = "Body")]
         [DataType(DataType.MultilineText)]
-        public string BlogContent { get; set; }
+        public string body { get; set; }
 
         [Display(Name = "Category")]
-        public string BlogCategory { get; set; }
+        public string category { get; set; }
 
-        [Display(Name = "Like Count")]
-        public int BlogLikeCount { get; set; }
+        [Display(Name = "Likes")]
+        public int likes { get; set; } = 0;
 
         [Display(Name = "Replies")]
-        public List<Reply> BlogReplies { get; set; }                
+        public List<Reply> replies { get; set; }
 
         [Display(Name = "CreateDate")]
-        public DateTime BlogCreateDate { get; set; }
+        public DateTime createdOn { get; set; } = DateTime.Now;
 
         [Display(Name = "Published")]
-        public bool BlogPublished { get; set; }
+        public bool isPublished { get; set; } = false;
     }
 }
