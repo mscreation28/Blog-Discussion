@@ -10,22 +10,18 @@ namespace BlogDiscussion2.Models
     public class Reply
     {
         [Key]
-        public int ReplyId { get; set; }
+        public int id { get; set; }
 
-        [Display(Name = "User ID")]
-        public string UserId { get; set; }
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public User user { get; set; }
 
-        [Display(Name = "Blog ID")]
-        public int BlogId { get; set; } 
         [ForeignKey("BlogId")]
-        public Blog Blog { get; set; }
+        public Blog blog { get; set; }
 
-        [Display(Name = "Reply Content")]
-        public string ReplyContent { get; set; }
+        [Display(Name = "Body")]
+        public string body { get; set; }
 
-        [Display(Name = "Reply Like Count")]
-        public int ReplyLikeCount { get; set; }
+        [Display(Name = "Like Count")]
+        public int likes { get; set; } = 0;
     }
 }
