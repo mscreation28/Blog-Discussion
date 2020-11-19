@@ -12,13 +12,15 @@
     @{
         foreach (var cookie in HttpContextAccessor.HttpContext.Request.Cookies)
         {
-            if (@cookie.Key == "Theme" && @cookie.Value == "dark")
+            if (@cookie.Key == "Theme" && @cookie.Value == "DARK")
             {
                 <link rel="stylesheet" href="~/css/app-dark.css" />
-                if(1==1)
-                {
-                    break;
-                }
+                break;
+            }
+            else if (@cookie.Key == "Theme" && @cookie.Value == "LIGHT")
+            {
+                <link rel="stylesheet" href="~/css/app-light.css" />
+                break;
             }
         }
     }
