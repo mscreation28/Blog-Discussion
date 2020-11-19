@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BlogDiscussion2.Data;
 using BlogDiscussion2.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BlogDiscussion2.Controllers
 {
@@ -47,6 +48,7 @@ namespace BlogDiscussion2.Controllers
         }
 
         // GET: Blogs/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -62,6 +64,7 @@ namespace BlogDiscussion2.Controllers
             if (ModelState.IsValid)
             {
                 blog.users = await GetCurruntUserAsync();
+                blog.isPublished = true;
                 _context.Add(blog);
                 Console.WriteLine(blog.users.Id);
                 await _context.SaveChangesAsync();
