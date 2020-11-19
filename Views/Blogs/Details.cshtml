@@ -19,8 +19,8 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.body)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.body)
+        <dd class="col-sm-10">
+            @Html.Raw(Model.body)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.category)
