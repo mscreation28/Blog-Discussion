@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace BlogDiscussion2.Models
 {
@@ -20,7 +21,7 @@ namespace BlogDiscussion2.Models
         public string title { get; set; }
 
         [Display(Name = "Body")]
-        [DataType(DataType.MultilineText)]
+        [AllowHtml]
         public string body { get; set; }
 
         [Display(Name = "Category")]

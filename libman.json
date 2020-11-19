@@ -2,9 +2,15 @@
   "version": "1.0",
   "defaultProvider": "cdnjs",
   "libraries": [
+
     {
-      "library": "jquery@3.5.1",
-      "destination": "wwwroot/jquery/"
+      "library": "tinymce@5.5.1",
+      "destination": "wwwroot/lib/tinymce/"
     }
-  ]
+  ,
+{
+  "library": "tinymce@5.5.1",
+  "destination": "wwwroot/lib/tinymce/"
+}
+]
 }
