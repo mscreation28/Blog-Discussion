@@ -18,9 +18,9 @@ namespace BlogDiscussion2.Data
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Blog_Discussion_Db;Trusted_Connection=True;MultipleActiveResultSets=true");
         }        
 
-        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Blog> blogs { get; set; }
         public DbSet<User> users { get; set; }
-        public DbSet<Reply> Replies { get; set; }
-        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Reply> replies { get; set; }
+        public DbSet<Notification> notifications { get; set; }
     }
 }

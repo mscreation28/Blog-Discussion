@@ -1,10 +1,9 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace BlogDiscussion2.Data.Migrations
+namespace BlogDiscussion2.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class init0 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +39,16 @@ namespace BlogDiscussion2.Data.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false),
+                    uName = table.Column<string>(nullable: true),
+                    userEmail = table.Column<string>(nullable: true),
+                    userPassword = table.Column<string>(nullable: true),
+                    userProfilePicture = table.Column<string>(nullable: true),
+                    userMobileNum = table.Column<string>(nullable: true),
+                    userTwitterHandle = table.Column<string>(nullable: true),
+                    userInstagramHandle = table.Column<string>(nullable: true),
+                    userFacebookHandle = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,7 +60,7 @@ namespace BlogDiscussion2.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -73,7 +81,7 @@ namespace BlogDiscussion2.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -153,6 +161,80 @@ namespace BlogDiscussion2.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "blogs",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    title = table.Column<string>(nullable: true),
+                    body = table.Column<string>(nullable: true),
+                    category = table.Column<string>(nullable: true),
+                    likes = table.Column<int>(nullable: false),
+                    createdOn = table.Column<DateTime>(nullable: false),
+                    isPublished = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_blogs", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_blogs_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "notifications",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    userId = table.Column<string>(nullable: true),
+                    label = table.Column<string>(nullable: true),
+                    body = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_notifications", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_notifications_AspNetUsers_userId",
+                        column: x => x.userId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "replies",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    BlogId = table.Column<int>(nullable: true),
+                    body = table.Column<string>(nullable: true),
+                    likes = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_replies", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_replies_blogs_BlogId",
+                        column: x => x.BlogId,
+                        principalTable: "blogs",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_replies_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -191,6 +273,26 @@ namespace BlogDiscussion2.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_blogs_UserId",
+                table: "blogs",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_notifications_userId",
+                table: "notifications",
+                column: "userId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_replies_BlogId",
+                table: "replies",
+                column: "BlogId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_replies_UserId",
+                table: "replies",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -211,7 +313,16 @@ namespace BlogDiscussion2.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "notifications");
+
+            migrationBuilder.DropTable(
+                name: "replies");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "blogs");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

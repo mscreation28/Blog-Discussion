@@ -4,20 +4,18 @@ using BlogDiscussion2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace BlogDiscussion2.Data.Migrations
+namespace BlogDiscussion2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201118143410_init0")]
-    partial class init0
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.6")
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -53,7 +51,7 @@ namespace BlogDiscussion2.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("blogs");
                 });
 
             modelBuilder.Entity("BlogDiscussion2.Models.Notification", b =>
@@ -76,7 +74,7 @@ namespace BlogDiscussion2.Data.Migrations
 
                     b.HasIndex("userId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("notifications");
                 });
 
             modelBuilder.Entity("BlogDiscussion2.Models.Reply", b =>
@@ -104,7 +102,7 @@ namespace BlogDiscussion2.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Replies");
+                    b.ToTable("replies");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
