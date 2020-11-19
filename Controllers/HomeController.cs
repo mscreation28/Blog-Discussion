@@ -44,17 +44,7 @@ namespace BlogDiscussion2.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<JsonResult> LikeBlog(Int32 id)
-        {
-            _logger.LogInformation(id.ToString());
-            Blog blog =  _context.blogs.Find(id);
-            _logger.LogInformation(blog.title);
-            blog.likes++; // Increase like count
-            _context.Update(blog);
-            await _context.SaveChangesAsync();
-            return Json(blog);
-        }
+        
         [HttpPost]
         public JsonResult timepass(Int32? id)
         {
