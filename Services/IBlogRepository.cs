@@ -13,5 +13,6 @@ namespace BlogDiscussion2.Services
         Blog GetBlogById(Int32 id);
 
         Blog DeleteBlog(Int32 id);
+        
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BlogDiscussion2.Migrations
 {
-    public partial class init0 : Migration
+    public partial class init1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,11 +41,6 @@ namespace BlogDiscussion2.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
-                    uName = table.Column<string>(nullable: true),
-                    userEmail = table.Column<string>(nullable: true),
-                    userPassword = table.Column<string>(nullable: true),
-                    userProfilePicture = table.Column<string>(nullable: true),
-                    userMobileNum = table.Column<string>(nullable: true),
                     userTwitterHandle = table.Column<string>(nullable: true),
                     userInstagramHandle = table.Column<string>(nullable: true),
                     userFacebookHandle = table.Column<string>(nullable: true)
