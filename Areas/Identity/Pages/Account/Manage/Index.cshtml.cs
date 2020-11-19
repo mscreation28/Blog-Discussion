@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BlogDiscussion2.Data;
+using Microsoft.AspNetCore.Http;
 
 namespace BlogDiscussion2.Areas.Identity.Pages.Account.Manage
 {
@@ -25,7 +26,7 @@ namespace BlogDiscussion2.Areas.Identity.Pages.Account.Manage
         }
 
         public string Username { get; set; }
-
+        
         [TempData]
         public string StatusMessage { get; set; }
 
@@ -49,7 +50,8 @@ namespace BlogDiscussion2.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Facebook")]
             public string userFacebookHandle { get; set; }
-            
+            public string theme { get; set; }
+
         }
 
 
@@ -66,7 +68,8 @@ namespace BlogDiscussion2.Areas.Identity.Pages.Account.Manage
                 PhoneNumber = phoneNumber,
                 userTwitterHandle = user_data.userTwitterHandle,
                 userInstagramHandle = user_data.userInstagramHandle,
-                userFacebookHandle = user_data.userFacebookHandle
+                userFacebookHandle = user_data.userFacebookHandle,
+                theme = Request.Cookies["Theme"]
             };
         }
 
@@ -112,6 +115,10 @@ namespace BlogDiscussion2.Areas.Identity.Pages.Account.Manage
             user_data.userTwitterHandle = Input.userTwitterHandle;
             user_data.userFacebookHandle = Input.userFacebookHandle;
             user_data.userInstagramHandle = Input.userInstagramHandle;
+
+            CookieOptions cookie = new CookieOptions();
+            cookie.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Append("Theme", Input.theme, cookie);            
 
             user_data.userTwitterHandle = Input.userTwitterHandle;
             await _userManager.UpdateAsync(user_data); 

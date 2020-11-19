@@ -8,42 +8,61 @@
 <h4>@ViewData["Title"]</h4>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">
-    <div class="col-md-6">
+    <div class="col col-md-9">
         <form id="profile-form" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled />
+            <div class="row">
+                <div class="col col-md-6">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Username"></label>
+                        <input asp-for="Username" class="form-control" disabled />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.PhoneNumber"></label>
+                        <input asp-for="Input.PhoneNumber" class="form-control" />
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    @*<div class="form-group">
+                <label asp-for="Input.Email"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>*@
+                    <div class="form-group">
+                        <label asp-for="Input.userTwitterHandle"></label>
+                        <input asp-for="Input.userTwitterHandle" class="form-control" />
+                        <span asp-validation-for="Input.userTwitterHandle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.userInstagramHandle"></label>
+                        <input asp-for="Input.userInstagramHandle" class="form-control" />
+                        <span asp-validation-for="Input.userInstagramHandle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.userFacebookHandle"></label>
+                        <input asp-for="Input.userFacebookHandle" class="form-control" />
+                        <span asp-validation-for="Input.userFacebookHandle" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col col-md-3">
+                    <h3>Theme</h3>
+                    <select asp-for="Input.theme">
+                        <option>LIGHT</option>
+                        <option>DARK</option>
+                    </select>
+                    <br /><br />
+                    <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.PhoneNumber"></label>
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
-            <label asp-for="Input.Email"></label>
-            <input asp-for="Input.Email" class="form-control" />
-            <span asp-validation-for="Input.Email" class="text-danger"></span>
-        </div>*@
-            <div class="form-group">
-                <label asp-for="Input.userTwitterHandle"></label>
-                <input asp-for="Input.userTwitterHandle" class="form-control" />
-                <span asp-validation-for="Input.userTwitterHandle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.userInstagramHandle"></label>
-                <input asp-for="Input.userInstagramHandle" class="form-control" />
-                <span asp-validation-for="Input.userInstagramHandle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.userFacebookHandle"></label>
-                <input asp-for="Input.userFacebookHandle" class="form-control" />
-                <span asp-validation-for="Input.userFacebookHandle" class="text-danger"></span>
-            </div>
-            <p>@ViewData["usa"]</p>
-            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
+    
+    @*<div class="col-md-3">
+        <h3>Theme</h3>
+        <select asp-for="Input.theme">
+            <option>LIGHT</option>
+            <option>DARK</option>
+        </select>
+    </div>*@
 </div>
 
 @section Scripts {

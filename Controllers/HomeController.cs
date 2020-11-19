@@ -35,7 +35,7 @@ namespace BlogDiscussion2.Controllers
         {
             CookieOptions cookie = new CookieOptions();
             cookie.Expires = DateTime.Now.AddDays(1);
-            Response.Cookies.Append("Theme", "dark", cookie);
+            Response.Cookies.Append("Theme", data, cookie);
             return Ok();
         }
 
@@ -65,7 +65,7 @@ namespace BlogDiscussion2.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        protected string Theme => Request.Cookies["Theme"] ?? "light";
+        protected string Theme => Request.Cookies["Theme"] ?? "LIGHT";
 
         public override void OnActionExecuted(ActionExecutedContext context)
         {
