@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BlogDiscussion2.Models;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Http;
 using BlogDiscussion2.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Http;
 
 namespace BlogDiscussion2.Controllers
 {
