@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogDiscussion2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201118175350_init0")]
-    partial class init0
+    [Migration("20201119061755_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -317,25 +317,10 @@ namespace BlogDiscussion2.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("uName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userEmail")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("userFacebookHandle")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userInstagramHandle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userMobileNum")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userPassword")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userProfilePicture")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userTwitterHandle")

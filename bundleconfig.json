@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "wwwroot/css/app-dark.min.css",
+    "inputFiles": [
+      "wwwroot/css/app-dark.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/app-light.min.css",
+    "inputFiles": [
+      "wwwroot/css/app-light.css"
+    ]
+  }
+]

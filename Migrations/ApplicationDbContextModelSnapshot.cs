@@ -315,25 +315,10 @@ namespace BlogDiscussion2.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("uName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userEmail")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("userFacebookHandle")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userInstagramHandle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userMobileNum")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userPassword")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userProfilePicture")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userTwitterHandle")

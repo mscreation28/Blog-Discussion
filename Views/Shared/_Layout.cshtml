@@ -1,11 +1,27 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BlogDiscussion2</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
     <link rel="stylesheet" href="~/css/site.css" />
+    @{
+        foreach (var cookie in HttpContextAccessor.HttpContext.Request.Cookies)
+        {
+            if (@cookie.Key == "Theme" && @cookie.Value == "dark")
+            {
+                <link rel="stylesheet" href="~/css/app-dark.css" />
+                if(1==1)
+                {
+                    break;
+                }
+            }
+        }
+    }
 </head>
 <body>
     <header>
@@ -39,6 +55,7 @@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - BlogDiscussion2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            @*<p>@ViewData["theme"]</p>*@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

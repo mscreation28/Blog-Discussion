@@ -1,0 +1,79 @@
+﻿@page
+@model OwnBlog
+@{
+    ViewData["Title"] = "BlogList";
+    ViewData["ActivePage"] = ManageNavPages.OwnBlog;
+
+}
+
+<h4>@ViewData["Title"]</h4>
+
+<div class="row">
+    <div class="col-md-12">
+        <p>
+            <a asp-action="Create" asp-controller="Blogs">Create New</a>
+        </p>
+        @if (Model.blogs_list != null)
+        {
+            <table class="table" style="color: white;">
+                <thead>
+                    <tr>
+                        <th style="color: white;">
+                            @Html.DisplayNameFor(model => model.title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.body)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.category)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.likes)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.createdOn)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.blogs_list)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.body)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.category)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.likes)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.createdOn)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-controller="Blogs" asp-route-id="@item.id">Edit</a> |
+                                <a asp-action="Details" asp-controller="Blogs" asp-route-id="@item.id">Details</a> |
+                                <a asp-action="Delete" asp-controller="Blogs" asp-route-id="@item.id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+        @if (Model.blogs_list == null)
+        {
+            <h3>You Haven't created any Blog Yet...!</h3>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

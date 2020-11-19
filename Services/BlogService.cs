@@ -1,5 +1,7 @@
 ﻿using BlogDiscussion2.Data;
 using BlogDiscussion2.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +11,13 @@ namespace BlogDiscussion2.Services
 {
     public class BlogService : IBlogRepository
     {
-        private readonly ApplicationDbContext _context;
-
-        public BlogService(ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;        
+        private readonly UserManager<User> _userManager;
+        public BlogService(ApplicationDbContext context, UserManager<User> userManager)
         {
             this._context = context;
             _context.Database.EnsureCreated();
+            _userManager = userManager; 
         }
         public Blog DeleteBlog(Int32 id)
         {
@@ -36,5 +39,6 @@ namespace BlogDiscussion2.Services
         {
             return _context.blogs;
         }
+       
     }
 }
