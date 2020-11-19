@@ -4,107 +4,105 @@ using BlogDiscussion2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace BlogDiscussion2.Data.Migrations
+namespace BlogDiscussion2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201118073011_init1")]
-    partial class init1
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.6")
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BlogDiscussion2.Models.Blog", b =>
                 {
-                    b.Property<int>("BlogId")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BlogCategory")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BlogContent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("BlogCreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("BlogLikeCount")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("BlogPublished")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("BlogTitle")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("BlogId");
+                    b.Property<string>("body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("category")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("createdOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("isPublished")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("likes")
+                        .HasColumnType("int");
+
+                    b.Property<string>("title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Blogs");
+                    b.ToTable("blogs");
                 });
 
             modelBuilder.Entity("BlogDiscussion2.Models.Notification", b =>
                 {
-                    b.Property<int>("NotificationId")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("NotificationContent")
+                    b.Property<string>("body")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NotificationLabel")
+                    b.Property<string>("label")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("userId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("NotificationId");
+                    b.HasKey("id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("userId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("notifications");
                 });
 
             modelBuilder.Entity("BlogDiscussion2.Models.Reply", b =>
                 {
-                    b.Property<int>("ReplyId")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ReplyContent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ReplyLikeCount")
+                    b.Property<int?>("BlogId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ReplyId");
+                    b.Property<string>("body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("likes")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
 
                     b.HasIndex("BlogId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Replies");
+                    b.ToTable("replies");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -346,27 +344,25 @@ namespace BlogDiscussion2.Data.Migrations
 
             modelBuilder.Entity("BlogDiscussion2.Models.Blog", b =>
                 {
-                    b.HasOne("BlogDiscussion2.Models.User", "Users")
+                    b.HasOne("BlogDiscussion2.Models.User", "users")
                         .WithMany("Blogs")
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("BlogDiscussion2.Models.Notification", b =>
                 {
-                    b.HasOne("BlogDiscussion2.Models.User", "User")
+                    b.HasOne("BlogDiscussion2.Models.User", "user")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("userId");
                 });
 
             modelBuilder.Entity("BlogDiscussion2.Models.Reply", b =>
                 {
-                    b.HasOne("BlogDiscussion2.Models.Blog", "Blog")
-                        .WithMany("BlogReplies")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("BlogDiscussion2.Models.Blog", "blog")
+                        .WithMany("replies")
+                        .HasForeignKey("BlogId");
 
-                    b.HasOne("BlogDiscussion2.Models.User", "User")
+                    b.HasOne("BlogDiscussion2.Models.User", "user")
                         .WithMany("UserReplies")
                         .HasForeignKey("UserId");
                 });
