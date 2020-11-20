@@ -101,6 +101,7 @@ namespace BlogDiscussion2.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,title,body,category,likes,createdOn,isPublished")] Blog blog)
         {
@@ -117,6 +118,7 @@ namespace BlogDiscussion2.Controllers
         }
 
         // GET: Blogs/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -136,6 +138,7 @@ namespace BlogDiscussion2.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,title,body,category,likes,createdOn,isPublished")] Blog blog)
         {
@@ -168,6 +171,7 @@ namespace BlogDiscussion2.Controllers
         }
 
         // GET: Blogs/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -187,6 +191,7 @@ namespace BlogDiscussion2.Controllers
 
         // POST: Blogs/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
