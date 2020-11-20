@@ -19,19 +19,25 @@ namespace BlogDiscussion2.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
-        //private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public HomeController(ILogger<HomeController> logger,
+                                IMapper mapper,
                                 ApplicationDbContext context)
         {
             _logger = logger;
             _context = context;
-            //_mapper = mapper;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.blogs.ToListAsync());
+            IEnumerable<BlogViewModel> blogs = _mapper.Map<IEnumerable<Blog>, IEnumerable<BlogViewModel>> (_context.blogs.Include(blog => blog.users));
+            foreach(BlogViewModel bg in blogs)
+            {
+                Console.WriteLine("User Id: "+ bg.users.Id);
+            }
+            return View(blogs);
         }
 
         [HttpPost]

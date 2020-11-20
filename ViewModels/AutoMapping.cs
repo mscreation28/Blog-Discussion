@@ -11,7 +11,7 @@ namespace BlogDiscussion2.ViewModels
     {
         public AutoMapping()
         {
-            CreateMap<Blog, BlogShortViewModel>();
+            CreateMap<Blog, BlogViewModel>();
         }
     }
 }
