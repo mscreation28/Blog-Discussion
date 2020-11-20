@@ -44,6 +44,9 @@ namespace BlogDiscussion2.Areas.Identity.Pages.Account.Manage
 
         public static string OwnBlogClass(ViewContext viewContext) => PageNavClass(viewContext, OwnBlog);
 
+        public static string Statistics = "Statistics";
+        public static string StatisticsClass(ViewContext viewContext) => PageNavClass(viewContext, Statistics);
+            
         private static string PageNavClass(ViewContext viewContext, string page)
         {
             var activePage = viewContext.ViewData["ActivePage"] as string

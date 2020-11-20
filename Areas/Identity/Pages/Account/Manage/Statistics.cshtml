@@ -1,0 +1,26 @@
+﻿@page
+@model Statistics
+@{
+    ViewData["Title"] = "Statistics";
+    ViewData["ActivePage"] = ManageNavPages.Statistics;
+
+}
+
+<h4>@ViewData["Title"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <h5>Blog Count</h5>
+        <h4>@Model.blogcount</h4>
+        <br />
+        <h5>Like Count</h5>
+        <h4>@Model.likecount</h4>
+        <br />
+        <h5>Reply Count</h5>
+        <h4>@Model.replycount</h4>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
