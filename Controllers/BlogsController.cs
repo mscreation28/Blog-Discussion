@@ -29,11 +29,14 @@ namespace BlogDiscussion2.Controllers
             return View(await _context.blogs.ToListAsync());
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<JsonResult> LikeBlog(Int32 id)
         {
             Blog blog = _context.blogs.Find(id);
             blog.likes++; // Increase like count
+            _context.Update(blog);
+            await _context.SaveChangesAsync();
             User user = await GetCurruntUserAsync();
             Notification noti = new Notification
             {
@@ -42,8 +45,6 @@ namespace BlogDiscussion2.Controllers
                 body = user.UserName + " Liked Your Blog: " + blog.title
             };
             await _context.notifications.AddAsync(noti);
-            await _context.SaveChangesAsync();
-            _context.Update(blog);
             await _context.SaveChangesAsync();
             return Json(blog);
         }

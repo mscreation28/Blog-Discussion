@@ -12,6 +12,7 @@
             <div class="card">
                 <div class="card-header d-flex">
                     @item.title
+                    @*@item.users.Id*@
                     <div class="ml-auto">
                         <button class="btn btn-outline-danger btn-sm rounded" id="btnLike" onclick="likeBlog('@Url.Action("LikeBlog","Blogs",new { id=item.id}, Context.Request.Scheme)')">
                         <i class="far fa-heart"></i> 
@@ -25,7 +26,7 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex">
-                    <a href="" class="btn btn-outline-success btn-sm rounded">Read More</a>
+                    <a asp-action="Details" asp-controller="Blogs" asp-route-id="@item.id" class="btn btn-outline-success btn-sm rounded">Read More</a>
                 </div>
             </div>
         </div>
