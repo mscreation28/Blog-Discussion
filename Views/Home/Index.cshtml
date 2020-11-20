@@ -4,49 +4,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.body)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.likes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.createdOn)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.title)
-                </td>
-                <td>
-                    @Html.Raw(item.body)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.category)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.likes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.createdOn)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
 <div class="row">
     @foreach (var item in Model)
     {
@@ -55,14 +13,22 @@
                 <div class="card-header d-flex">
                     @item.title
                     <div class="ml-auto">
-                        <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
+                        <button class="btn btn-outline-danger btn-sm rounded" id="btnLike" onclick="likeBlog('@Url.Action("LikeBlog","Home",new { id=item.id}, Context.Request.Scheme)')">
+                        <i class="far fa-heart"></i> 
+                            <span id="likeCount">@item.likes</span>
+                        </button>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="card-text">
                         @Html.Raw(item.body)
                     </div>
-                    <a href="" class="btn btn-outline-success btn-sm">Read More</a>
+                </div>
+                <div class="card-footer d-flex">
+                    <a href="" class="btn btn-outline-success btn-sm rounded">Read More</a>
+                    <div class="ml-auto text-center">
+                        Likes : <span id="likeCount">@item.likes</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,11 +36,22 @@
 </div>
 @section Scripts{ 
     <script type="text/javascript">
-        $(function () {
-            $("#btnGet").click(function () {
+        likeBlog = (url) => {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                success: function (res) {
+                    @*$('#likeCount').html(res.likes);*@
+                    location.reload();
+                    console.log(res.likes);
+                }
+            })
+        }
+        @*$(function () {
+            $("#btnLike").click(function () {
                 $.ajax({
                     type: "POST",
-                    url: "/Home/AjaxMethod",
+                    url: "/Home/LikeBlog",
                     data: { "name": $("#txtName").val() },
                     success: function (response) {
                         alert("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
@@ -87,7 +64,7 @@
                     }
                 });
             });
-        });
+        });*@
     </script>
 }
 @*<h1>TinyMCE Quick Start Guide</h1>
