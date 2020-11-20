@@ -9,6 +9,7 @@ using BlogDiscussion2.Data;
 using BlogDiscussion2.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using BlogDiscussion2.ViewModels;
 
 namespace BlogDiscussion2.Controllers
 {
@@ -62,10 +63,33 @@ namespace BlogDiscussion2.Controllers
             {
                 return NotFound();
             }
-
             return View(blog);
         }
-
+        public async Task<IActionResult> ViewBlog(Int32? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            Blog blog = await _context.blogs
+                .Include(blog => blog.users)
+                .FirstOrDefaultAsync(blog => blog.id == id);
+            if(blog == null)
+            {
+                return NotFound();
+            }
+            BlogViewModel blogViewModel = new BlogViewModel
+            {
+                id = blog.id,
+                title = blog.title,
+                body = blog.body,
+                category = blog.category,
+                createdOn = blog.createdOn,
+                likes = blog.likes,
+                users = blog.users
+            };
+            return View(blogViewModel);
+        }
         // GET: Blogs/Create
         [Authorize]
         public IActionResult Create()
@@ -77,6 +101,7 @@ namespace BlogDiscussion2.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,title,body,category,likes,createdOn,isPublished")] Blog blog)
         {
@@ -93,6 +118,7 @@ namespace BlogDiscussion2.Controllers
         }
 
         // GET: Blogs/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -112,6 +138,7 @@ namespace BlogDiscussion2.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,title,body,category,likes,createdOn,isPublished")] Blog blog)
         {
@@ -144,6 +171,7 @@ namespace BlogDiscussion2.Controllers
         }
 
         // GET: Blogs/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -163,6 +191,7 @@ namespace BlogDiscussion2.Controllers
 
         // POST: Blogs/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

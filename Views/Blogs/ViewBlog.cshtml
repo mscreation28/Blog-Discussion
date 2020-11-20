@@ -1,0 +1,52 @@
+﻿@model BlogDiscussion2.ViewModels.BlogViewModel
+
+@{
+    ViewData["Title"] = "View Blog";
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-header d-flex">
+            @Model.users.UserName
+            <br />
+            @if (Model.createdOn.Year != DateTime.Now.Year)
+            {
+                @Model.createdOn.ToString("MMM dd yyyy")
+            }
+            else
+            {
+                @Model.createdOn.ToString("MMM dd")
+            }
+            <div class="ml-auto">
+                <button class="btn btn-outline-danger btn-sm rounded" id="btnLike" onclick="likeBlog('@Url.Action("LikeBlog","Blogs",new { id=Model.id}, Context.Request.Scheme)')">
+                    <i class="far fa-heart"></i>
+                    <span id="likeCount">@Model.likes</span>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="card-title blockquote">
+                @Model.title
+            </div>
+            <div class="card-text">
+                @Html.Raw(Model.body)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        likeBlog = (url) => {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                success: function (res) {
+                    @*$('#likeCount').html(res.likes);*@
+                    location.reload();
+                    console.log(res.likes);
+                }
+            })
+    }
+    </script>
+}

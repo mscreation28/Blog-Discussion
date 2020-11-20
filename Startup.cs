@@ -13,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BlogDiscussion2.Models;
+using BlogDiscussion2.ViewModels;
+using AutoMapper;
 
 namespace BlogDiscussion2
 {
@@ -31,13 +33,20 @@ namespace BlogDiscussion2
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+               .AddEntityFrameworkStores<ApplicationDbContext>();
             /*services.AddIdentity<User, IdentityRole>()
                 .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();*/
+            //var mapperConfig = new MapperConfiguration(mc =>
+            //{
+            //    mc.AddProfile(new AutoMapping());
+            //});
+            //IMapper mapper = mapperConfig.CreateMapper();
+            //services.AddSingleton(mapper);
+            services.AddAutoMapper(typeof(AutoMapping));
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
