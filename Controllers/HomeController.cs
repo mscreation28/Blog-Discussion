@@ -32,12 +32,12 @@ namespace BlogDiscussion2.Controllers
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<BlogShortViewModel> blogs = _mapper.Map<IEnumerable<Blog>, IEnumerable< BlogShortViewModel >> (_context.blogs.Include(blog => blog.users));
-            foreach(BlogShortViewModel bg in blogs)
+            IEnumerable<BlogViewModel> blogs = _mapper.Map<IEnumerable<Blog>, IEnumerable<BlogViewModel>> (_context.blogs.Include(blog => blog.users));
+            foreach(BlogViewModel bg in blogs)
             {
                 Console.WriteLine("User Id: "+ bg.users.Id);
             }
-            return View(await _context.blogs.ToListAsync());
+            return View(blogs);
         }
 
         [HttpPost]
