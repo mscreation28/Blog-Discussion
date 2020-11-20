@@ -9,6 +9,7 @@ using BlogDiscussion2.Data;
 using BlogDiscussion2.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using BlogDiscussion2.ViewModels;
 
 namespace BlogDiscussion2.Controllers
 {
@@ -62,10 +63,33 @@ namespace BlogDiscussion2.Controllers
             {
                 return NotFound();
             }
-
             return View(blog);
         }
-
+        public async Task<IActionResult> ViewBlog(Int32? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            Blog blog = await _context.blogs
+                .Include(blog => blog.users)
+                .FirstOrDefaultAsync(blog => blog.id == id);
+            if(blog == null)
+            {
+                return NotFound();
+            }
+            BlogViewModel blogViewModel = new BlogViewModel
+            {
+                id = blog.id,
+                title = blog.title,
+                body = blog.body,
+                category = blog.category,
+                createdOn = blog.createdOn,
+                likes = blog.likes,
+                users = blog.users
+            };
+            return View(blogViewModel);
+        }
         // GET: Blogs/Create
         [Authorize]
         public IActionResult Create()
