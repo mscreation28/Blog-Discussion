@@ -41,12 +41,14 @@ namespace BlogDiscussion2.Areas.Identity.Pages.Account.Manage
         public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
 
         public static string OwnBlog = "OwnBlog";
-
         public static string OwnBlogClass(ViewContext viewContext) => PageNavClass(viewContext, OwnBlog);
 
         public static string Statistics = "Statistics";
         public static string StatisticsClass(ViewContext viewContext) => PageNavClass(viewContext, Statistics);
-            
+
+        public static string Notifications = "Notifications";
+        public static string NotificationClass(ViewContext viewContext) => PageNavClass(viewContext, Notifications);
+
         private static string PageNavClass(ViewContext viewContext, string page)
         {
             var activePage = viewContext.ViewData["ActivePage"] as string

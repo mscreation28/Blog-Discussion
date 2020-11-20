@@ -1,0 +1,51 @@
+﻿@page
+@model NotificationModel
+@{
+    ViewData["Title"] = "Notifications";
+    ViewData["ActivePage"] = ManageNavPages.Notifications;
+
+}
+
+<h4>@ViewData["Title"]</h4>
+
+<div class="row">
+    <div class="col col-md-12">        
+        @if (Model.notifications_list != null)
+        {
+            <div class="card">
+                <div class="card-header d-flex">
+                    Notification
+                    <div class="ml-auto">
+                        @*<button class="btn btn-outline-danger btn-sm rounded" id="btnLike" onclick="likeBlog('@Url.Action("LikeBlog","Home",new { id=item.id}, Context.Request.Scheme)')">*@
+                            <i class="fa fa-trash"></i>
+                            @*<span id="likeCount">@item.likes</span>*@
+                        @*</button>*@
+                    </div>
+                </div>
+                <div class="card-body">
+                    @foreach (var item in Model.notifications_list)
+                    {
+                    <div class="row">                        
+                            <div class="col-md-3">
+
+                                <b> @Html.DisplayFor(modelItem => item.label)</b>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.DisplayFor(modelItem => item.body)
+                            </div>                        
+                    </div>                        
+
+                    }
+                    </div>                
+            </div>                   
+        }
+        @if (Model.notifications_list == null)
+        {
+            <h3>You Have no Notification Yet...!</h3>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
