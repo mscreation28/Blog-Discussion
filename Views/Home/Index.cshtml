@@ -13,7 +13,7 @@
                 <div class="card-header d-flex">
                     @item.title
                     <div class="ml-auto">
-                        <button class="btn btn-outline-danger btn-sm rounded" id="btnLike" onclick="likeBlog('@Url.Action("LikeBlog","Home",new { id=item.id}, Context.Request.Scheme)')">
+                        <button class="btn btn-outline-danger btn-sm rounded" id="btnLike" onclick="likeBlog('@Url.Action("LikeBlog","Blogs",new { id=item.id}, Context.Request.Scheme)')">
                         <i class="far fa-heart"></i> 
                             <span id="likeCount">@item.likes</span>
                         </button>
@@ -26,9 +26,6 @@
                 </div>
                 <div class="card-footer d-flex">
                     <a href="" class="btn btn-outline-success btn-sm rounded">Read More</a>
-                    <div class="ml-auto text-center">
-                        Likes : <span id="likeCount">@item.likes</span>
-                    </div>
                 </div>
             </div>
         </div>

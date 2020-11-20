@@ -1,8 +1,9 @@
 {
   "version": "1.0",
-  "defaultProvider": "unpkg",
+  "defaultProvider": "cdnjs",
   "libraries": [
     {
+      "provider": "unpkg",
       "library": "bootstrap@4.5.3",
       "destination": "wwwroot/lib/bootstrap/"
     },
@@ -11,8 +12,6 @@
       "library": "bootstrap-toggle@2.2.2",
       "destination": "wwwroot/lib/bootstrap-toggle/"
     },
-  "defaultProvider": "cdnjs",
-  "libraries": [
     {
       "provider": "cdnjs",
       "library": "tinymce@5.5.1",
@@ -29,17 +28,3 @@
     }
   ]
 }
-//{
-//  "version": "1.0",
-//  "defaultProvider": "cdnjs",
-//  "libraries": [
-//    {
-//      "library": "tinymce@5.5.1",
-//      "destination": "wwwroot/lib/tinymce/"
-//    },
-//    {
-//      "library": "font-awesome@5.15.1",
-//      "destination": "wwwroot/lib/font-awesome/"
-//    }
-//  ]
-//}

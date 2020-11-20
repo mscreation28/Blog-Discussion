@@ -29,6 +29,24 @@ namespace BlogDiscussion2.Controllers
             return View(await _context.blogs.ToListAsync());
         }
 
+        [HttpPost]
+        public async Task<JsonResult> LikeBlog(Int32 id)
+        {
+            Blog blog = _context.blogs.Find(id);
+            blog.likes++; // Increase like count
+            User user = await GetCurruntUserAsync();
+            Notification noti = new Notification
+            {
+                user = user,
+                label = "Like",
+                body = user.UserName + " Liked Your Blog: " + blog.title
+            };
+            await _context.notifications.AddAsync(noti);
+            await _context.SaveChangesAsync();
+            _context.Update(blog);
+            await _context.SaveChangesAsync();
+            return Json(blog);
+        }
         // GET: Blogs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
