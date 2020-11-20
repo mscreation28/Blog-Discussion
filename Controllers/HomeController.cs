@@ -10,6 +10,8 @@ using BlogDiscussion2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Http;
+using AutoMapper;
+using BlogDiscussion2.ViewModels;
 
 namespace BlogDiscussion2.Controllers
 {
@@ -17,12 +19,14 @@ namespace BlogDiscussion2.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
+        //private readonly IMapper _mapper;
 
         public HomeController(ILogger<HomeController> logger,
                                 ApplicationDbContext context)
         {
             _logger = logger;
             _context = context;
+            //_mapper = mapper;
         }
 
         public async Task<IActionResult> Index()

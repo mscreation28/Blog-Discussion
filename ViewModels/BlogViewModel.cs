@@ -7,5 +7,6 @@ namespace BlogDiscussion2.ViewModels
 {
     public class BlogViewModel
     {
+
     }
 }

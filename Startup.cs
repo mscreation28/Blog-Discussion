@@ -32,14 +32,12 @@ namespace BlogDiscussion2
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
              services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>(); 
-
+                .AddEntityFrameworkStores<ApplicationDbContext>();
             /*services.AddIdentity<User, IdentityRole>()
                 .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();*/
-
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
